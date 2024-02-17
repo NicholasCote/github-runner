@@ -7,6 +7,21 @@ The container image needs to know the repository to use and uses an API token to
 
 ***Note:*** Do not include secret information on build if you are planning on storing the container image in a public repository. Instead build the base container and specify the secret information when running the container. 
 
-`docker build --build-arg="REPO=NicholasCote/github-runner" --build-arg="TOKEN=${GITHUB_TOKEN}" -t ncote/github-runner .`
+`docker build -t ncote/github-runner .`
 
 `docker run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} ncote/github-runner`
+
+## Using K8s Secrets
+
+If you intend to deploy a GitHub runner to a Kubernetes cluster secrets can be utilized to inject the GitHub API token. Secrets can be created in a number of different ways. Add something like the following lines to your Deployment YAML file to include the secret in the GitHub runner image on run:
+
+```yaml
+        env:
+        - name: REPO
+          value: {{ .Values.webapp.repo }}
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: ncote-github-token
+              key: token
+```
