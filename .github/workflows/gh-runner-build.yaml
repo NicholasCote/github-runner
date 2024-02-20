@@ -22,6 +22,15 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
-      - name: Build Podman image
-        run: |
-          podman build -t ncote/github-runner:${{ steps.date.outputs.date }} .
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+            # Provide the current directory as build context 
+            context: .
+            # Specify where the Dockerfile is located in relation to the repo base path
+            file: Dockerfile
+            # Enable the push to docker hub
+            push: false
+            # Provide the tags to apply to the image, this example uses the latest image tag 
+            tags: |
+                ncote/github-runner:${{ steps.date.outputs.date }}
