@@ -23,4 +23,4 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
       - name: Build and push image
-        run: podman built -t ncote/github-runner:${{ steps.date.outputs.date }} .
+        run: podman build -t ncote/github-runner:${{ steps.date.outputs.date }} .
