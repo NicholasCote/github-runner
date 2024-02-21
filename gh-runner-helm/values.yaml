@@ -6,6 +6,6 @@ webapp:
   container: 
     imagePullPolicy: Always
     port: 80
-    memory: 16G
+    memory: 2G
     cpu: 2    
   repo: NicholasCote/github-runner    image: hub.k8s.ucar.edu/ncote/github-runner:2024-02-21.16
