@@ -25,3 +25,7 @@ If you intend to deploy a GitHub runner to a Kubernetes cluster secrets can be u
               name: ncote-github-token
               key: token
 ```
+
+## Helm Chart
+
+There is an example Helm chart in the gh-runner-helm/ directory. Update the values.yaml file with custom information for your own deployment.
