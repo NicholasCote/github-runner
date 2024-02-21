@@ -17,6 +17,7 @@ buildah \
     curl \
     jq \
     build-essential \
+    git \
     libssl-dev \
     libffi-dev \
     podman \
