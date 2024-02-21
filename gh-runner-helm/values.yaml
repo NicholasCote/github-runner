@@ -8,5 +8,4 @@ webapp:
     port: 80
     memory: 16G
     cpu: 2    
-    image: hub.k8s.ucar.edu/ncote/github-runner:2024-02-15
-  repo: NicholasCote/github-runner
+  repo: NicholasCote/github-runner    image: hub.k8s.ucar.edu/ncote/github-runner:2024-02-21.16
