@@ -11,6 +11,7 @@ ENV TOKEN=${TOKEN} \
 RUN apt-get update -y && apt-get upgrade -y && useradd -m podman
 
 RUN apt-get install -y --no-install-recommends \
+buildah \
     ca-certificates \
     curl \
     jq \
