@@ -11,7 +11,8 @@ ENV TOKEN=${TOKEN} \
     
 RUN apt-get update -y && apt-get upgrade -y && useradd -m podman
 
-RUN rm -rf ~/.local/share/containers
+RUN rm -rf ~/.local/share/containers && \
+    usermod --add-subuids 200000-201000 --add-subgids 200000-201000 podman
 
 RUN apt-get install -y --no-install-recommends \
     buildah \
