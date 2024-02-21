@@ -11,8 +11,10 @@ ENV TOKEN=${TOKEN} \
     
 RUN apt-get update -y && apt-get upgrade -y && useradd -m podman
 
+RUN rm -rf ~/.local/share/containers
+
 RUN apt-get install -y --no-install-recommends \
-buildah \
+    buildah \
     ca-certificates \
     curl \
     jq \
@@ -24,12 +26,14 @@ buildah \
     python3 \
     python3-venv \
     python3-dev \
-    python3-pip
+    python3-pip \
+    uidmap \
+    slirp4netns
 
 RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    chown -R podman ~podman && /home/podman/actions-runner/bin/installdependencies.sh
+    chown -R podman ~podman && /home/podman/actions-runner/bin/installdependencies.sh 
 
 COPY start.sh start.sh
 
