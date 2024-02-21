@@ -23,7 +23,7 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H.%M')" >> $GITHUB_OUTPUT
       - name: Build and push image
-        run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
+        run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} . --no-cache --format=docker
       - name: Login to Harbor
         run: podman login hub.k8s.ucar.edu -u ncote -p ${{ secrets.NCOTE_HARBOR_LOGIN  }}
       - name: Push image to Harbor
@@ -36,6 +36,8 @@ jobs:
         run: | 
           sed -i '24d' gh-runner-helm/Chart.yaml
           echo "appVersion: '${{ steps.date.outputs.date }}'" >> gh-runner-helm/Chart.yaml
+      - name: Run echo $GITHUB_ACTOR
+        run: echo $GITHUB_ACTOR
       - name: Commit changes to main branch
         run: |
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
