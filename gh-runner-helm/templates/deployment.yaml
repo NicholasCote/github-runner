@@ -25,11 +25,13 @@ spec:
             cpu: {{ .Values.webapp.container.cpu }}
         ports:
         - containerPort: {{ .Values.webapp.container.port }}
+        securityContext:
+          privileged: true
         env:
         - name: REPO
           value: {{ .Values.webapp.repo }}
         - name: TOKEN
           valueFrom:
             secretKeyRef:
-              name: <repo_name>-github-token
+              name: ncote-github-token
               key: token

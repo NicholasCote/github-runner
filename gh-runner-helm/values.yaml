@@ -1,12 +1,12 @@
 replicaCount: 1
 
 webapp:
-  name: <repo_name>-github-runner
-  group: <repo_name>-runner
+  name: ncote-github-runner
+  group: ncote-github-runner
   container: 
     imagePullPolicy: Always
     port: 80
-    memory: 1G
+    memory: 16G
     cpu: 2    
     image: hub.k8s.ucar.edu/ncote/github-runner:2024-02-15
-  repo: <username/org>/<repo_name>
+  repo: NicholasCote/github-runner

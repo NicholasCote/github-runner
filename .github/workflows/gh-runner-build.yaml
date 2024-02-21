@@ -23,4 +23,22 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
       - name: Build and push image
-        run: podman build -t ncote/github-runner:${{ steps.date.outputs.date }} .
+        run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
+      - name: Login to Harbor
+        run: podman login hub.k8s.ucar.edu -u ncote -p ${{ secrets.NCOTE_HARBOR_LOGIN  }}
+      - name: Push image to Harbor
+        run: podman push hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }}
+      - name: Update Helm values.yaml
+        run: | 
+          sed -i '11d' gh-runner-helm/values.yaml
+          echo "    image: hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }}" >> gh-runner-helm/values.yaml
+      - name: Update Helm Chart.yaml
+        run: | 
+          sed -i '24d' gh-runner-helm/Chart.yaml
+          echo "appVersion: '${{ steps.date.outputs.date }}'" >> gh-runner-helm/Chart.yaml
+      - name: Commit changes to dev branch
+        run: |
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
+          git commit -a -m "Update Helm chart via GH Actions"
+          git push
