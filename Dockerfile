@@ -1,3 +1,4 @@
+# Trying to get GitHub Runner working to build container images
 FROM ubuntu:latest
 
 ARG RUNNER_VERSION="2.313.0"
