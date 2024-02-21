@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=nointeractive
 ARG REPO=default
 ARG TOKEN=secretinformation
 
+# Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
     REPO=${REPO}
     
