@@ -30,7 +30,7 @@ jobs:
         run: podman push hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }}
       - name: Update Helm values.yaml
         run: | 
-          sed -i '11d' gh-runner-helm/values.yaml
+          sed -i '12d' gh-runner-helm/values.yaml
           echo "    image: hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }}" >> gh-runner-helm/values.yaml
       - name: Update Helm Chart.yaml
         run: | 
