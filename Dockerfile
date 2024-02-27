@@ -42,6 +42,9 @@ COPY start.sh start.sh
 
 RUN chmod +x start.sh
 
+RUN sed -i '1d' /etc/subuid && \
+    sed -i '1d' /etc/subgid
+
 USER podman
 
 ENTRYPOINT ["./start.sh"]
