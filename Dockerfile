@@ -13,8 +13,7 @@ ENV TOKEN=${TOKEN} \
 RUN apt-get update -y && apt-get upgrade -y && useradd -m podman
 
 # Add user ids to get rid of shared mount error
-RUN rm -rf ~/.local/share/containers && \
-    usermod --add-subuids 200000-201000 --add-subgids 200000-201000 podman
+RUN rm -rf ~/.local/share/containers
 
 RUN apt-get install -y --no-install-recommends \
     buildah \
@@ -41,9 +40,6 @@ RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
 COPY start.sh start.sh
 
 RUN chmod +x start.sh
-
-RUN sed -i '1d' /etc/subuid && \
-    sed -i '1d' /etc/subgid
 
 USER podman
 
