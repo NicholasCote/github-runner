@@ -12,7 +12,7 @@ ENV TOKEN=${TOKEN} \
     
 RUN apt-get update -y && apt-get upgrade -y && useradd -m podman
 
-# Add user ids to get rid of shared mount error
+# Add user ids to allow rootless builds
 RUN rm -rf ~/.local/share/containers && \
     usermod --add-subuids 100000-165535 --add-subgids 100000-165535 podman
 
