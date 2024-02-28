@@ -17,7 +17,7 @@ jobs:
     steps:
       # Step 1 is to checkout the github repo used to build the Dockerfile
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # Get the date to apply to image tag
       - name: Get current date
         id: date
