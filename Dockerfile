@@ -5,27 +5,22 @@ ARG RUNNER_VERSION="2.313.0"
 ARG DEBIAN_FRONTEND=nointeractive
 ARG REPO=default
 ARG TOKEN=secretinformation
+# Use 1001 and 121 for compatibility with GitHub-hosted runners
+ARG RUNNER_UID=1000
+ARG DOCKER_GID=1001
 
 # Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
     REPO=${REPO}
-    
-RUN apt-get update -y && apt-get upgrade -y && useradd -m builder
 
-# Add user ids to allow rootless builds
-RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 builder
-
-VOLUME /var/lib/containers
-VOLUME /home/podman/.local/share/containers
-
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y --no-install-recommends \
+    build-essential \
     buildah \
     ca-certificates \
     curl \
-    jq \
-    build-essential \
     fuse-overlayfs \
     git \
+    jq \
     libssl-dev \
     libffi-dev \
     podman \
@@ -36,15 +31,22 @@ RUN apt-get install -y --no-install-recommends \
     uidmap \
     slirp4netns
 
-RUN cd /home/builder && mkdir actions-runner && cd actions-runner && \
+RUN adduser --disabled-password --gecos "" --uid $RUNNER_UID runner \
+    && groupadd docker --gid $DOCKER_GID \
+    && usermod -aG sudo runner \
+    && usermod -aG docker runner \
+    && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
+    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
+
+RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    chown -R builder ~builder && /home/builder/actions-runner/bin/installdependencies.sh 
+    chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh 
 
 COPY start.sh start.sh
 
 RUN chmod +x start.sh
 
-USER builder
+USER runner
 
 ENTRYPOINT ["./start.sh"]
