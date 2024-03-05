@@ -8,6 +8,7 @@ ARG TOKEN=secretinformation
 # Use 1001 and 121 for compatibility with GitHub-hosted runners
 ARG RUNNER_UID=1000
 ARG DOCKER_GID=1001
+ARG XDG_RUNTIME_DIR=/run/user/${UID}
 
 # Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
