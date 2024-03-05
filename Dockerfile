@@ -44,6 +44,9 @@ COPY start.sh start.sh
 
 RUN chmod +x start.sh
 
+RUN loginctl enable-linger $(whoami) && \
+    sleep 1
+
 RUN systemctl --user enable --now podman.socket
 
 USER runner
