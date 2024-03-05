@@ -1,7 +1,7 @@
 # Trying to get GitHub Runner working to build container images
 FROM ubuntu:latest
 
-ARG RUNNER_VERSION="2.313.0"
+ARG RUNNER_VERSION="2.314.1"
 ARG DEBIAN_FRONTEND=nointeractive
 ARG REPO=default
 ARG TOKEN=secretinformation
@@ -12,6 +12,9 @@ ARG DOCKER_GID=1001
 # Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
     REPO=${REPO}
+
+RUN useradd -m runner && \
+    usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     build-essential \
@@ -30,13 +33,6 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y --no-install-r
     python3-pip \
     uidmap \
     slirp4netns
-
-RUN adduser --disabled-password --gecos "" --uid $RUNNER_UID runner \
-    && groupadd docker --gid $DOCKER_GID \
-    && usermod -aG sudo runner \
-    && usermod -aG docker runner \
-    && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
-    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
 
 RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
