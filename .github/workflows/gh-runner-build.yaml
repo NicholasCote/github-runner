@@ -22,10 +22,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H.%M')" >> $GITHUB_OUTPUT
-      - name: Show /etc/subuid
-        run: cat /etc/subuid
-      - name: Show /etc/subgid
-        run: cat /etc/subgid
       - name: Build and push image
         run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
       - name: Login to Harbor
