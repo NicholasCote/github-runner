@@ -1,5 +1,11 @@
 # github-runner
-Create a GitHub runner container image
+Create a GitHub runner container image that builds containers with rootless podman
+
+```{note}
+A GitHub API token is required to connect the runner to a repository. GitHub tokens can be generated at this [link to creating API tokens](https://github.com/settings/tokens)
+```
+
+[![GitHub Runner Build, Push, & Update](https://github.com/NicholasCote/github-runner/actions/workflows/gh-runner-build.yaml/badge.svg)](https://github.com/NicholasCote/github-runner/actions/workflows/gh-runner-build.yaml)
 
 ## Building an image
 
@@ -7,9 +13,9 @@ The container image needs to know the repository to use and uses an API token to
 
 ***Note:*** Do not include secret information on build if you are planning on storing the container image in a public repository. Instead build the base container and specify the secret information when running the container. 
 
-`docker build -t ncote/github-runner .`
+`podman build -t ncote/github-runner .`
 
-`docker run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} ncote/github-runner`
+`podman run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} ncote/github-runner`
 
 ## Using K8s Secrets
 
