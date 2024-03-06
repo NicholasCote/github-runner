@@ -27,7 +27,7 @@ jobs:
       - name: Show /etc/subgid
         run: cat /etc/subgid
       - name: Build and push image
-        run: buildah build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
+        run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
       - name: Login to Harbor
         run: podman login hub.k8s.ucar.edu -u ncote -p ${{ secrets.NCOTE_HARBOR_LOGIN  }}
       - name: Push image to Harbor
