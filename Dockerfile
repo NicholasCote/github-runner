@@ -9,9 +9,9 @@ ARG TOKEN=secretinformation
 # Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
     REPO=${REPO}
-# Install jq
 
-RUN dnf -y update; yum -y install jq
+# Install jq and git
+RUN dnf -y update; yum -y install jq git
 
 RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
