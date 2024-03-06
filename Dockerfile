@@ -11,7 +11,7 @@ ENV TOKEN=${TOKEN} \
     REPO=${REPO}
 
 # Install jq and git
-RUN dnf -y update; yum -y install jq git
+RUN dnf -y update; yum -y install jq git python
 
 RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \

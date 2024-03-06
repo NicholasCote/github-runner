@@ -7,6 +7,10 @@ A GitHub API token is required to connect the runner to a repository. GitHub tok
 
 [![GitHub Runner Build, Push, & Update](https://github.com/NicholasCote/github-runner/actions/workflows/gh-runner-build.yaml/badge.svg)](https://github.com/NicholasCote/github-runner/actions/workflows/gh-runner-build.yaml)
 
+## GitOps CICD
+
+This repository utilizes GitHub actions to build a new container image whenever changes are made, push that image to NSF NCAR's Harbor container registry, 
+
 ## Building an image
 
 The container image needs to know the repository to use and uses an API token to connect to it in order to get a GitHub runner registration token. These can be supplied during the container build, or when the container is run. Examples of both commands can be found below:
