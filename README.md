@@ -15,7 +15,9 @@ The container image needs to know the repository to use and uses an API token to
 
 `podman build -t hub.k8s.ucar.edu/ncote/github-runner:2024-03-06.18.22 .`
 
-`podman run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} hub.k8s.ucar.edu/ncote/github-runner:2024-03-06.18.22`
+```
+podman run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} hub.k8s.ucar.edu/ncote/github-runner:2024-03-06.18.22
+```
 
 ## Using K8s Secrets
 
