@@ -13,9 +13,9 @@ The container image needs to know the repository to use and uses an API token to
 
 ***Note:*** Do not include secret information on build if you are planning on storing the container image in a public repository. Instead build the base container and specify the secret information when running the container. 
 
-`podman build -t ncote/github-runner .`
+`podman build -t hub.k8s.ucar.edu/ncote/github-runner:2024-03-06.18.22 .`
 
-`podman run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} ncote/github-runner`
+`podman run -e REPO=NicholasCote/github-runner -e TOKEN=${GITHUB_TOKEN} hub.k8s.ucar.edu/ncote/github-runner:2024-03-06.18.22`
 
 ## Using K8s Secrets
 
