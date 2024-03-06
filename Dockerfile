@@ -1,5 +1,5 @@
 # Trying to get GitHub Runner working to build container images
-FROM ubuntu:latest
+FROM quay.io/podman/stable:latest
 
 ARG RUNNER_VERSION="2.314.1"
 ARG DEBIAN_FRONTEND=nointeractive
