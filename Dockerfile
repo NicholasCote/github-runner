@@ -9,6 +9,7 @@ ARG TOKEN=secretinformation
 # Provide the Repo and token at run time
 ENV TOKEN=${TOKEN} \
     REPO=${REPO}
+# Install jq
 
 RUN dnf -y update; yum -y install jq
 
