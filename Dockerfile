@@ -11,7 +11,10 @@ ENV TOKEN=${TOKEN} \
     REPO=${REPO}
 
 # Install jq and git
-RUN dnf -y update; yum -y install jq git python python-pip
+RUN dnf -y update; yum -y install jq git python python-pip && \
+    dnf -y install 'dnf-command(config-manager)' && \
+    dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo && \
+    dnf -y install gh
 
 RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
