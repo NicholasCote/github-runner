@@ -19,13 +19,8 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       # Get the date to apply to image tag
-      - name: Spell Check
-        uses: codespell-project/actions-codespell@v2
-        with:
-          check_filenames: true
-          check_hidden: true
-          ignore_words_file: .github/workflows/codespell.txt
-          skip: "./git/,./start.sh"
+      - uses: rojopolis/spellcheck-github-actions@0.36.0
+        name: Spellcheck
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H.%M')" >> $GITHUB_OUTPUT
