@@ -21,8 +21,6 @@ RUN cd /home/podman && mkdir actions-runner && cd actions-runner && \
     tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     chown -R podman ~podman && /home/podman/actions-runner/bin/installdependencies.sh 
 
-RUN echo 'alias docker=podman' >> /home/podman/.bashrc
-
 COPY start.sh start.sh
 
 RUN chmod +x start.sh
