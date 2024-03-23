@@ -1,0 +1,12 @@
+jupyter-book==0.12.3
+sphinx_pythia_theme==2022.3.29
+ghp-import==2.1.0
+sphinxcontrib-applehelp==1.0.4
+sphinxcontrib-bibtex==2.5.0
+sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-htmlhelp==2.0.1
+sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-qthelp==1.0.3
+notebook==6.5.4
+sphinx-book-theme==0.1.10
+sphinx-jupyterbook-latex==0.4.7
