@@ -25,7 +25,7 @@ jobs:
       - name: Build and push image
         run: podman build -t hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }} .
       - name: Login to Harbor
-        run: podman login hub.k8s.ucar.edu -u ncote -p ${{ secrets.NCOTE_HARBOR_LOGIN  }}
+        run: podman login hub.k8s.ucar.edu -u robot-ncote+ncote -p ${{ secrets.HARBOR_ROBOT_PW  }}
       - name: Push image to Harbor
         run: podman push hub.k8s.ucar.edu/ncote/github-runner:${{ steps.date.outputs.date }}
       - name: Update Helm values.yaml
