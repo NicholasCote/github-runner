@@ -1,7 +1,7 @@
 # Trying to get GitHub Runner working to build container images
 FROM quay.io/podman/stable:latest
 
-ARG RUNNER_VERSION="2.316.0"
+ARG RUNNER_VERSION="2.316.1"
 ARG DEBIAN_FRONTEND=nointeractive
 ARG REPO=default
 ARG TOKEN=secretinformation
