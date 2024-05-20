@@ -1,4 +1,4 @@
-# Trying to get GitHub Runner working to build container images
+# GitHub Runner to build container images and update Jupyter Book
 FROM quay.io/podman/stable:latest
 
 ARG RUNNER_VERSION="2.316.1"
