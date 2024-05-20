@@ -10,3 +10,4 @@ sphinxcontrib-qthelp==1.0.3
 notebook==6.5.4
 sphinx-book-theme==0.1.10
 sphinx-jupyterbook-latex==0.4.7
+lxml_html_clean
