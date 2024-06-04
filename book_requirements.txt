@@ -1,5 +1,5 @@
 jupyter-book==0.12.3
-sphinx_pythia_theme==2022.3.29
+sphinx_pythia_theme==2024.3.2
 ghp-import==2.1.0
 sphinxcontrib-applehelp==1.0.4
 sphinxcontrib-bibtex==2.5.0
